@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D/7bPK6OI90=",
+  "dgSpecHash": "Q3lJ57DPA9g=",
   "success": true,
-  "projectFilePath": "C:\\repo\\CoolPanelApi\\CoolPanelApi.csproj",
+  "projectFilePath": "C:\\repo\\cool_panel_app\\CoolPanelApi\\CoolPanelApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",

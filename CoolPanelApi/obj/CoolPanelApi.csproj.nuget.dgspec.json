@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repo\\CoolPanelApi\\CoolPanelApi.csproj": {}
+    "C:\\repo\\cool_panel_app\\CoolPanelApi\\CoolPanelApi.csproj": {}
   },
   "projects": {
-    "C:\\repo\\CoolPanelApi\\CoolPanelApi.csproj": {
+    "C:\\repo\\cool_panel_app\\CoolPanelApi\\CoolPanelApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repo\\CoolPanelApi\\CoolPanelApi.csproj",
+        "projectUniqueName": "C:\\repo\\cool_panel_app\\CoolPanelApi\\CoolPanelApi.csproj",
         "projectName": "CoolPanelApi",
-        "projectPath": "C:\\repo\\CoolPanelApi\\CoolPanelApi.csproj",
+        "projectPath": "C:\\repo\\cool_panel_app\\CoolPanelApi\\CoolPanelApi.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\repo\\CoolPanelApi\\obj\\",
+        "outputPath": "C:\\repo\\cool_panel_app\\CoolPanelApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
