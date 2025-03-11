@@ -1,0 +1,6 @@
+@CoolPanelApi_HostAddress = http://localhost:5168
+
+GET {{CoolPanelApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

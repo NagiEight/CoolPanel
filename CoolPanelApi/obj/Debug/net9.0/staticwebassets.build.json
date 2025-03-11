@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "bEHHmRFAHuV2/3q7horC1vGO4UnUmSYfhGYIVVd9UD8=",
+  "Source": "CoolPanelApi",
+  "BasePath": "_content/CoolPanelApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
