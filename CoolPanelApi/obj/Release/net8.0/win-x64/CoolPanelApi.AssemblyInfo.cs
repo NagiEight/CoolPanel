@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CoolPanelApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+067f775679766de6cc6c46b605d506aea392447b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb034ca4a79dbb065b8bffba09ff55bda4c9947b")]
 [assembly: System.Reflection.AssemblyProductAttribute("CoolPanelApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CoolPanelApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
