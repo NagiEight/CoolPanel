@@ -11,6 +11,7 @@ public class HomeController : ControllerBase
 [HttpGet("system-usage")]
 public async Task<IActionResult> GetSystemUsage()
 {
+    Console.WriteLine("Connection established from: ");
     try
     {
         // Await the result of the asynchronous method before returning it

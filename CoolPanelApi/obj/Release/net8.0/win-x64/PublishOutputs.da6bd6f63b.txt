@@ -1,12 +1,6 @@
 C:\repo\cool_panel_app\CoolPanelApi\publish\CoolPanelApi.exe
-C:\repo\cool_panel_app\CoolPanelApi\publish\publish\web.config
 C:\repo\cool_panel_app\CoolPanelApi\publish\appsettings.Development.json
 C:\repo\cool_panel_app\CoolPanelApi\publish\appsettings.json
-C:\repo\cool_panel_app\CoolPanelApi\publish\publish\appsettings.Development.json
-C:\repo\cool_panel_app\CoolPanelApi\publish\publish\appsettings.json
-C:\repo\cool_panel_app\CoolPanelApi\publish\publish\CoolPanelApi.deps.json
-C:\repo\cool_panel_app\CoolPanelApi\publish\publish\CoolPanelApi.runtimeconfig.json
-C:\repo\cool_panel_app\CoolPanelApi\publish\publish\CoolPanelApi.staticwebassets.endpoints.json
 C:\repo\cool_panel_app\CoolPanelApi\publish\CoolPanelApi.dll
 C:\repo\cool_panel_app\CoolPanelApi\publish\CoolPanelApi.deps.json
 C:\repo\cool_panel_app\CoolPanelApi\publish\CoolPanelApi.runtimeconfig.json

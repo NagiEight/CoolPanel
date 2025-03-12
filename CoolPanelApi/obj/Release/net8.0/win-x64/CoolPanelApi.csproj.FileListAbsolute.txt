@@ -362,12 +362,6 @@ C:\repo\CoolPanelApi\obj\Release\net8.0\win-x64\ref\CoolPanelApi.dll
 C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\appsettings.Development.json
 C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\appsettings.json
 C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\CoolPanelApi.staticwebassets.endpoints.json
-C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\publish\web.config
-C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\publish\appsettings.Development.json
-C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\publish\appsettings.json
-C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\publish\CoolPanelApi.deps.json
-C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\publish\CoolPanelApi.runtimeconfig.json
-C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\publish\CoolPanelApi.staticwebassets.endpoints.json
 C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\CoolPanelApi.exe
 C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\CoolPanelApi.deps.json
 C:\repo\cool_panel_app\CoolPanelApi\bin\Release\net8.0\win-x64\CoolPanelApi.runtimeconfig.json

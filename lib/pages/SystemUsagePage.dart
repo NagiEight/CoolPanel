@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:cool_panel_app/models/SystemUsageModel.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:cool_panel_app/models/SystemUsageModel.dart';
+import '../services/SystemUsageServices.dart';
 
 class SystemUsagePage extends StatefulWidget {
   const SystemUsagePage({Key? key}) : super(key: key);
@@ -13,51 +11,39 @@ class SystemUsagePage extends StatefulWidget {
 }
 
 class _SystemUsagePageState extends State<SystemUsagePage> {
+  final SystemUsageService _service = SystemUsageService();
   SystemUsage? systemUsage;
   Timer? _timer;
-  String? apiEndpoint;
-  bool isGridView = true; // Tracks current view mode (Grid or List)
+  bool isGridView = true;
 
   @override
   void initState() {
     super.initState();
-    _checkApiEndpoint();
+    _initialize();
   }
 
-  Future<void> _checkApiEndpoint() async {
-    final prefs = await SharedPreferences.getInstance();
-    final savedEndpoint = prefs.getString('apiEndpoint');
-    setState(() {
-      apiEndpoint = savedEndpoint;
-    });
-    if (apiEndpoint != null) {
+  Future<void> _initialize() async {
+    await _service.loadApiEndpoint();
+    if (_service.apiEndpoint != null) {
       _startAutoUpdate();
     }
   }
 
   void _startAutoUpdate() {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      fetchSystemUsage();
+      _fetchData();
     });
-
-    fetchSystemUsage(); // Initial fetch
+    _fetchData(); // Initial fetch
   }
 
-  Future<void> fetchSystemUsage() async {
-    if (apiEndpoint == null) return;
-
+  Future<void> _fetchData() async {
     try {
-      final response = await http.get(Uri.parse(apiEndpoint!));
-      if (response.statusCode == 200) {
-        final jsonData = json.decode(response.body);
-        setState(() {
-          systemUsage = SystemUsage.fromJson(jsonData);
-        });
-      } else {
-        debugPrint('Failed to load system usage data: ${response.statusCode}');
-      }
+      final usage = await _service.fetchSystemUsage();
+      setState(() {
+        systemUsage = usage;
+      });
     } catch (e) {
-      debugPrint("Error fetching data: $e");
+      debugPrint(e.toString());
     }
   }
 
@@ -70,51 +56,59 @@ class _SystemUsagePageState extends State<SystemUsagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: apiEndpoint == null
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'API endpoint not configured.',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/settings');
-                    },
-                    child: const Text('Go to Settings'),
-                  ),
-                ],
-              ),
-            )
+      body: _service.apiEndpoint == null
+          ? _buildNoApiConfiguredView()
           : systemUsage == null
               ? const Center(child: CircularProgressIndicator())
-              : Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      _buildViewSwitcherButton(),
-                      const SizedBox(height: 16),
-                      Expanded(
-                        child: isGridView
-                            ? GridView(
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 16,
-                                  mainAxisSpacing: 16,
-                                  childAspectRatio: 1.5,
-                                ),
-                                children: _buildUsageTiles(),
-                              )
-                            : ListView(
-                                children: _buildUsageTiles(),
-                              ),
-                      ),
-                    ],
+              : _buildMainContent(),
+    );
+  }
+
+  Widget _buildNoApiConfiguredView() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'API endpoint not configured.',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/settings');
+            },
+            child: const Text('Go to Settings'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainContent() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          _buildViewSwitcherButton(),
+          const SizedBox(height: 16),
+          Expanded(
+            child: isGridView
+                ? GridView(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                      childAspectRatio: 1.5,
+                    ),
+                    children: _buildUsageTiles(),
+                  )
+                : ListView(
+                    children: _buildUsageTiles(),
                   ),
-                ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -125,7 +119,7 @@ class _SystemUsagePageState extends State<SystemUsagePage> {
         ElevatedButton(
           onPressed: () {
             setState(() {
-              isGridView = !isGridView; // Toggles between Grid and List View
+              isGridView = !isGridView;
             });
           },
           child: Text(isGridView ? 'Switch to List View' : 'Switch to Grid View'),
@@ -145,7 +139,6 @@ class _SystemUsagePageState extends State<SystemUsagePage> {
       _buildStatCard("Used RAM", "${systemUsage!.usedRam.toStringAsFixed(2)} GB", Icons.memory, Colors.pink),
     ];
   }
-
 Widget _buildStatCard(String title, String value, IconData icon, Color color) {
   final textColor = Theme.of(context).brightness == Brightness.dark
       ? Colors.white
@@ -162,14 +155,18 @@ Widget _buildStatCard(String title, String value, IconData icon, Color color) {
         children: [
           Row(
             children: [
-              Icon(icon, color: color, size: 30),
-              const SizedBox(width: 8),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: textColor.withOpacity(0.7),
+              Icon(icon, color: color, size: 15),
+              const SizedBox(width: 6),
+              Flexible(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: textColor.withOpacity(0.7),
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
                 ),
               ),
             ],
